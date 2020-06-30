@@ -26,8 +26,6 @@ exports.getProduct = (req, res, next) => {
 exports.getIndex = (req, res, next) => {
   Product.fetchAll()
   .then(([rows, filedData]) => {
-    console.log("this is my rows", rows);
-    console.log(filedData);
     res.render('shop/index', {
       prods: rows,
       pageTitle: 'Shop',
