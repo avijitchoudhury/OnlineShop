@@ -36,9 +36,19 @@ app.use(errorController.get404);
 Product.belongsTo(User, {constraints: true, onDelete: 'CASCADE'});
 
 sequelize
+// .sync({ force: true })
 .sync({ force: true })
 .then(result => {
-  // console.log(result);
+  return User.findByPk(1);
+})
+.then(user => {
+  if (!user) {
+    return User.create({ name: "Avi", email: "avi@gmail.com"});
+  }
+  return user;
+})
+.then(user => {
+  console.log(user);
   app.listen(3000);
 })
 .catch(err => {
